@@ -46,7 +46,7 @@ actions :{
     },
     async deleteTodo({commit}, id){
         console.log(id)
-        await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+        await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
             method: 'DELETE',
           })
           commit('removeTodo', id);
@@ -64,6 +64,7 @@ actions :{
         
         const response = await fetch(`https://jsonplaceholder.typicode.com/todos/${updTodo.id}`,{
             method: 'PUT',
+            mode:'cors',
             body: JSON.stringify({
               updTodo
             }),
@@ -72,7 +73,7 @@ actions :{
             },
           });
         const todoss = await response.json()
-        
+        console.log(todoss)
         commit('updateTodo', todoss);
 
     }
@@ -85,10 +86,11 @@ mutations :{
         const num = parseInt(id)
         state.todos.splice(num-1,1)
     },
-    updateTodo:(state, updTodo) =>{
-        const index = state.todos.findIndex(todo => todo.id === updTodo);
+    updateTodo:(state, todoss) =>{
+        const index = state.todos.findIndex(todo => todo.id === todoss.id);
+        console.log(index)
         if (index !== -1){
-            state.todos.splice(index,1, updTodo);
+            state.todos[index]= todoss;
         }
     }
 }
