@@ -5,7 +5,7 @@
       <h1>Todos App</h1>
       <AddTodo />
       <FilterTodo />
-      <Todos /> 
+      <TodoList/> 
     </div>
 
   </div>
@@ -13,14 +13,14 @@
 </template>
 
 <script>
-import Todos from './components/Todos';
+import TodoList from './components/Todos';
 import AddTodo from './components/AddTodo';
 import FilterTodo from './components/FilterTodo'
 
 export default {
   name: 'App',
   components: {
-    Todos,
+    TodoList,
     AddTodo,
     FilterTodo
   }

@@ -27,7 +27,7 @@ import {mapGetters , mapActions} from 'vuex';
 
 
 export default {
-    name: "Todos",
+    name: "TodoList",
     computed: mapGetters(['allTodos']),
     methods:{
         ...mapActions(['fetchTodos','deleteTodo', 'updateTodo']),
