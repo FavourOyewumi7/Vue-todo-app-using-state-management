@@ -1,5 +1,10 @@
 # todo-vuex
 
+check it out here
+```
+https://vue-todo-app-using-state-management-aw7g.vercel.app/
+```
+
 ## Project setup
 ```
 npm install
