@@ -2,21 +2,31 @@
   <div>
       Filter Todos:
       <select @change="filterTodo($event)">
-          <option value="200">200</option>
-          <option value="100">100</option>
-          <option value="50">50</option>
-          <option value="20">20</option>
-          <option value="10">10</option>
-          <option value="5">5</option>
+          <option value="200">2</option>
+          <option value="50">5</option>
+          <option value="20">10</option>
+         
       </select>
   </div>
 </template>
 
 <script>
-import {mapActions} from 'vuex';
+// import {mapActions} from 'vuex';
+import {store} from '../store.js'
 export default {
     name:'FilterTodo',
-    methods:mapActions(['filterTodo'])
+    // methods:mapActions(['filterTodo']),
+    data(){
+      return {
+        store
+      }
+    },
+    methods:{
+      filterTodo(event){
+        const limit = parseInt(event.target.options[event.target.options.selectedIndex].innerText);
+        store.todo_count = limit
+    }
+    }
 }
 </script>
 

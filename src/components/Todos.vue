@@ -12,8 +12,8 @@
     </div>
         <div class="todos" >
             
-        <div @dblclick="onDblClick(todo)" v-for="todo in allTodos" :key="todo.id" class="todo" :class="{'is-complete':todo.completed}"> {{todo.title}}
-            <i class="fas fa-trash-alt" @click="deleteTodo(todo.id)"></i>
+        <div @dblclick="onDblClick(todo)" v-for="todo in store.todos" :key="todo.index" class="todo" :class="{'is-complete':todo.completed}"> {{todo.title}}
+            <i class="fas fa-trash-alt" @click="deleteTodo(todo.index)"></i>
         </div>
         
         </div>
@@ -23,27 +23,34 @@
 
 <script>
 
-import {mapGetters , mapActions} from 'vuex';
-
+// import {mapGetters , mapActions} from 'vuex';
+import { store } from '../store.js';
 
 export default {
+  
     name: "TodoList",
-    computed: mapGetters(['allTodos']),
+    // computed: mapGetters(['allTodos']),
     methods:{
-        ...mapActions(['fetchTodos','deleteTodo', 'updateTodo']),
-        onDblClick(todo){
-            const updTodo = {
-                id: todo.id,
-                title: todo.title,
-                completed : (!todo.completed)
-            }
-            this.updateTodo(updTodo)
+    //     ...mapActions(['fetchTodos','deleteTodo', 'updateTodo']),
+         onDblClick(todo){
+             todo.completed = !todo.completed
+     },
+        deleteTodo(value){
+          console.log(value)
+          store.todos.splice(value-1, 1)
         }
     },
-    created(){
-        this.fetchTodos();
-    }
-}
+    
+    data(){
+      return {
+        values : store.todos.slice(store.todo_count+1, store.todos.length),
+        store
+      }
+    },
+    
+  
+  }
+
 </script>
 
 <style scoped>

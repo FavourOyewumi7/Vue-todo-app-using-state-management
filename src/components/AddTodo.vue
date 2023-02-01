@@ -2,8 +2,8 @@
     <div>
        <h1> Add Todo</h1>
        <div class="add">       
-            <form @submit="onSubmit">
-                <input type="text" v-model="title" placeholder="Add Todo..">
+            <form @submit.prevent="onSubmit">
+                <input type="text" v-model.lazy="title" placeholder="Add Todo..">
                 <input type="submit" value="">
             </form>
         </div>
@@ -13,19 +13,24 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex'
+import {store} from '../store.js'
+// import {mapActions} from 'vuex'
 export default {
     name:"AddTodo",
     data:()=>{
         return{
-            title: ''
+            title:'',
+            store
         }
     },
     methods: {
-        ...mapActions(['addTodo']),
-        onSubmit(e){
-            e.preventDefault();
-            this.addTodo(this.title)
+        // ...mapActions(['addTodo']),
+        onSubmit(){
+            store.addTodos(this.title)
+            this.title = '';
+            
+               
+               
         }
     }
 }
